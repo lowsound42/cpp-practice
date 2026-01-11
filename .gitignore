@@ -3,3 +3,7 @@ build
 Build
 
 CMakeLists.txt
+
+tasks.json
+
+launch.json
