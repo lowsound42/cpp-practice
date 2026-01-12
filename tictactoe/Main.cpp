@@ -57,8 +57,8 @@ int main()
         {
             player = &playerTwo;
         }
-        gameLoop(std::toupper(row) - 'A', column, &board, player, turn);
-        isGameOver = board.CheckWin();
+        gameLoop(std::toupper(row), column, &board, player, turn);
+        isGameOver = board.CheckWin(playerOne.GetSymbol(), playerTwo.GetSymbol());
     }
 
     return 0;

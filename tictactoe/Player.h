@@ -12,4 +12,5 @@ public:
     Player(char symbol, std::string name) : symbol_(symbol), name_(name) {};
     void MakeMove(char row, int column, Board *board);
     std::string GetName();
+    char GetSymbol();
 };

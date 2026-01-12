@@ -7,6 +7,11 @@ void Player::MakeMove(char row, int column, Board *board)
     board->MarkBox(int(row - 65), column, symbol_);
 }
 
+char Player::GetSymbol()
+{
+    return symbol_;
+}
+
 std::string Player::GetName()
 {
     return name_;

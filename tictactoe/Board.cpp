@@ -78,18 +78,18 @@ void Board::DrawGrid()
     DrawFrame();
 }
 
-bool Board::CheckRows()
+bool Board::CheckRows(char symbol1, char symbol2)
 {
     for (Row &row : rows_)
     {
-        if (row.CheckRow())
+        if (row.CheckRow(symbol1, symbol2))
         {
             return true;
         }
     }
     return false;
 }
-bool Board::CheckColumns()
+bool Board::CheckColumns(char symbol1, char symbol2)
 {
     for (int i = 0; i < gridSize_; i++)
     {
@@ -99,13 +99,13 @@ bool Board::CheckColumns()
             temp.emplace_back(rows_[j][i]);
         }
 
-        auto check = Utils::DoCheck(temp);
+        auto check = Utils::DoCheck(temp, symbol1, symbol2);
         if(check) return true;
     }
     return false;
 }
 
-bool Board::CheckDiagonals()
+bool Board::CheckDiagonals(char symbol1, char symbol2)
 {
     std::vector<char> mainDiag;
     for (int i = 0; i < gridSize_; i++)
@@ -113,7 +113,7 @@ bool Board::CheckDiagonals()
         mainDiag.emplace_back(rows_[i][i]);
     }
 
-    auto checkMain = Utils::DoCheck(mainDiag);
+    auto checkMain = Utils::DoCheck(mainDiag, symbol1, symbol2);
         if(checkMain) return true;
 
     std::vector<char> antiDiag;
@@ -122,7 +122,7 @@ bool Board::CheckDiagonals()
         antiDiag.emplace_back(rows_[i][gridSize_ - 1 - i]);
     }
 
-    auto checkAnti = Utils::DoCheck(antiDiag);
+    auto checkAnti = Utils::DoCheck(antiDiag, symbol1, symbol2);
         if(checkAnti) return true;
 
     return false;
@@ -133,7 +133,7 @@ int Board::GetGridSize()
     return gridSize_;
 }
 
-bool Board::CheckWin()
+bool Board::CheckWin(char symbol1, char symbol2)
 {
-    return CheckColumns() || CheckDiagonals() || CheckRows();
+    return CheckColumns(symbol1, symbol2) || CheckDiagonals(symbol1, symbol2) || CheckRows(symbol1, symbol2);
 }

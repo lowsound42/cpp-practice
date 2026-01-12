@@ -14,9 +14,9 @@ public:
     Row(int size) : row_(size, ' ') {};
     char &operator[](int x) { return row_[x]; }
     const char &operator[](int x) const { return row_[x]; }
-    bool CheckRow()
+    bool CheckRow(char symbolOne, char symbolTwo)
     {
-        auto check = Utils::DoCheck(row_);
+        auto check = Utils::DoCheck(row_, symbolOne, symbolTwo);
         if(check) return true;
         return false;
     }

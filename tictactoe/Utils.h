@@ -5,16 +5,17 @@
 class Utils
 {
 public:
-    static bool DoCheck(std::vector<char> list) 
+    static bool DoCheck(std::vector<char> list, char symbolOne, char symbolTwo) 
     {
-        auto checkX = checkValues(list, 'X');
-        auto checkY = checkValues(list, 'Y');
+        auto checkX = checkValues(list, symbolOne);
+        auto checkY = checkValues(list, symbolTwo);
         if (checkX || checkY)
         {
             return true;
         }
         else return false;
     }
+
     static bool checkValues(std::vector<char> list, char toCheck)
     {
         return std::ranges::all_of(list, [toCheck](char &c)
