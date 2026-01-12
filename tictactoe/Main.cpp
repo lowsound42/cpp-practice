@@ -2,7 +2,7 @@
 #include "Board.h"
 #include "Player.h"
 
-void gameLoop(Board *board, Player &player, bool &playerOneTurn, int &moveCount,int &maxMoves)
+void gameLoop(Board *board, Player &player, bool &playerOneTurn, int &moveCount, int &maxMoves)
 {
     char row;
     int column;
@@ -35,9 +35,7 @@ int main()
     std::cout << "Enter a grid size: ";
     std::cin >> gridSize;
     int moveCount = 0;
-    int* moveCountPtr = &moveCount;
     int maxMoves = gridSize * gridSize;
-        int* maxMovePtr = &maxMoves;
 
     Player playerOne = Player('X', "Player 1");
     Player playerTwo = Player('O', "Player 2");
@@ -48,7 +46,6 @@ int main()
 
     bool isGameOver = false;
     bool playerOneTurn = true;
-    bool *turn = &playerOneTurn;
 
     while (!isGameOver)
     {
@@ -62,7 +59,7 @@ int main()
         {
             player = &playerTwo;
         }
-        gameLoop(&board, *player, *turn, *moveCountPtr, *maxMovePtr);
+        gameLoop(&board, *player, playerOneTurn, moveCount, maxMoves);
         if (moveCount >= maxMoves) {
             std::cout << "It's a draw!\n";
             break;;
