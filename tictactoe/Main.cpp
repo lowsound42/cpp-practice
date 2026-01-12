@@ -2,9 +2,11 @@
 #include "Board.h"
 #include "Player.h"
 
-void gameLoop(char row, int column, Board *board, Player *player, bool *playerOneTurn)
+void gameLoop(Board *board, Player &player, bool &playerOneTurn, int &moveCount,int &maxMoves)
 {
-    std::cout << player->GetName() << ", enter a slot (row <space> column, e.g. A 1): ";
+    char row;
+    int column;
+    std::cout << player.GetName() << ", enter a slot (row <space> column, e.g. A 1): ";
     std::cin >> row >> column;
     if (!Utils::ValidRow(row, board->GetGridSize()))
     {
@@ -21,9 +23,9 @@ void gameLoop(char row, int column, Board *board, Player *player, bool *playerOn
         std::cerr << "Slot already taken! Please try again.\n";
         return;
     }
-    player->MakeMove(std::toupper(row), column, board);
-    *playerOneTurn = !(*playerOneTurn);
-
+    player.MakeMove(std::toupper(row), column, board);
+    moveCount++;
+    playerOneTurn = !playerOneTurn;
     board->DrawGrid();
 }
 
@@ -32,9 +34,13 @@ int main()
     int gridSize;
     std::cout << "Enter a grid size: ";
     std::cin >> gridSize;
+    int moveCount = 0;
+    int* moveCountPtr = &moveCount;
+    int maxMoves = gridSize * gridSize;
+        int* maxMovePtr = &maxMoves;
 
     Player playerOne = Player('X', "Player 1");
-    Player playerTwo = Player('0', "Player 2");
+    Player playerTwo = Player('O', "Player 2");
 
     Board board = Board(gridSize);
     board.InitializeRows();
@@ -46,8 +52,7 @@ int main()
 
     while (!isGameOver)
     {
-        char row;
-        int column;
+  
         Player *player = nullptr;
         if (playerOneTurn)
         {
@@ -57,7 +62,11 @@ int main()
         {
             player = &playerTwo;
         }
-        gameLoop(std::toupper(row), column, &board, player, turn);
+        gameLoop(&board, *player, *turn, *moveCountPtr, *maxMovePtr);
+        if (moveCount >= maxMoves) {
+            std::cout << "It's a draw!\n";
+            break;;
+        }
         isGameOver = board.CheckWin(playerOne.GetSymbol(), playerTwo.GetSymbol());
     }
 

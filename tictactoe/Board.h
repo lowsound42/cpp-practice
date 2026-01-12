@@ -24,6 +24,6 @@ public:
     bool CheckRows(char symbol1, char symbol2);
     bool CheckColumns(char symbol1, char symbol2);
     bool CheckDiagonals(char symbol1, char symbol2);
-    int GetGridSize();
-    bool ValidMove(int row, int column);
+    int GetGridSize() const;
+    bool ValidMove(int row, int column) const;
 };

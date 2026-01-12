@@ -32,7 +32,7 @@ void Board::DrawFrame()
 
 void Board::DrawRow(int i)
 {
-    std::cout << char(i + 65);
+    std::cout << char(i + 'A');
     std::cout << "|";
     for (int j = 0; j < gridSize_; j++)
     {
@@ -44,7 +44,7 @@ void Board::DrawRow(int i)
     std::cout << "\n";
 }
 
-bool Board::ValidMove(int row, int column)
+bool Board::ValidMove(int row, int column) const
 {
     return rows_[row][column] == ' ';
 }
@@ -128,7 +128,7 @@ bool Board::CheckDiagonals(char symbol1, char symbol2)
     return false;
 }
 
-int Board::GetGridSize()
+int Board::GetGridSize() const
 {
     return gridSize_;
 }

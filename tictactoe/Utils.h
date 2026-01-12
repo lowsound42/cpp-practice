@@ -5,7 +5,7 @@
 class Utils
 {
 public:
-    static bool DoCheck(std::vector<char> list, char symbolOne, char symbolTwo) 
+    static bool DoCheck(std::vector<char>& list, char symbolOne, char symbolTwo) 
     {
         auto checkX = checkValues(list, symbolOne);
         auto checkY = checkValues(list, symbolTwo);
