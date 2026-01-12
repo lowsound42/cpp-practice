@@ -15,7 +15,6 @@ public:
     static bool ValidRow(const char c, int gridsize)
     {
         char x = std::toupper(c);
-
         if (x >= 'A' && x < 'A' + gridsize)
         {
             return true;

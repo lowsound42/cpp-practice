@@ -16,8 +16,14 @@ void gameLoop(char row, int column, Board *board, Player *player, bool *playerOn
         std::cerr << "Invalid column! Please try again.\n";
         return;
     }
-    player->MakeMove(row, column, board);
+    if(!board->ValidMove(std::toupper(row) - 'A', column))
+    {
+        std::cerr << "Slot already taken! Please try again.\n";
+        return;
+    }
+    player->MakeMove(std::toupper(row), column, board);
     *playerOneTurn = !(*playerOneTurn);
+
     board->DrawGrid();
 }
 
@@ -51,7 +57,7 @@ int main()
         {
             player = &playerTwo;
         }
-        gameLoop(row, column, &board, player, turn);
+        gameLoop(std::toupper(row) - 'A', column, &board, player, turn);
         isGameOver = board.CheckWin();
     }
 

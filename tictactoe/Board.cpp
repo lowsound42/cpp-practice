@@ -44,6 +44,11 @@ void Board::DrawRow(int i)
     std::cout << "\n";
 }
 
+bool Board::ValidMove(int row, int column)
+{
+    return rows_[row][column] == ' ';
+}
+
 void Board::InitializeRows()
 {
     for (int i = 0; i < gridSize_; i++)
@@ -54,6 +59,11 @@ void Board::InitializeRows()
 
 void Board::MarkBox(int row, int column, char symbol)
 {
+    if(rows_[row][column] != ' ')
+    {
+        std::cerr << "Box already marked!\n";
+        return;
+    }
     rows_[row][column] = symbol;
 }
 

@@ -25,4 +25,5 @@ public:
     bool CheckColumns();
     bool CheckDiagonals();
     int GetGridSize();
+    bool ValidMove(int row, int column);
 };
