@@ -99,12 +99,8 @@ bool Board::CheckColumns()
             temp.emplace_back(rows_[j][i]);
         }
 
-        auto checkX = Utils::CheckValues(temp, 'X');
-        auto checkY = Utils::CheckValues(temp, 'Y');
-        if (checkX || checkY)
-        {
-            return true;
-        }
+        auto check = Utils::DoCheck(temp);
+        if(check) return true;
     }
     return false;
 }
@@ -117,12 +113,8 @@ bool Board::CheckDiagonals()
         mainDiag.emplace_back(rows_[i][i]);
     }
 
-    auto checkX = Utils::CheckValues(mainDiag, 'X');
-    auto checkY = Utils::CheckValues(mainDiag, 'Y');
-    if (checkX || checkY)
-    {
-        return true;
-    }
+    auto checkMain = Utils::DoCheck(mainDiag);
+        if(checkMain) return true;
 
     std::vector<char> antiDiag;
     for (int i = 0; i < gridSize_; i++)
@@ -130,12 +122,8 @@ bool Board::CheckDiagonals()
         antiDiag.emplace_back(rows_[i][gridSize_ - 1 - i]);
     }
 
-    checkX = Utils::CheckValues(antiDiag, 'X');
-    checkY = Utils::CheckValues(antiDiag, 'Y');
-    if (checkX || checkY)
-    {
-        return true;
-    }
+    auto checkAnti = Utils::DoCheck(antiDiag);
+        if(checkAnti) return true;
 
     return false;
 }

@@ -16,12 +16,8 @@ public:
     const char &operator[](int x) const { return row_[x]; }
     bool CheckRow()
     {
-        auto checkX = Utils::CheckValues(row_, 'X');
-        auto checkO = Utils::CheckValues(row_, '0');
-        if (checkX || checkO)
-        {
-            return true;
-        }
+        auto check = Utils::DoCheck(row_);
+        if(check) return true;
         return false;
     }
 };
